@@ -30,17 +30,20 @@ jobs:
     - name: Display version File
       run: ./gradlew versionFile
 
-    - name: Export build/version.properties
-      run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
+    - name: Build Image and EBArchive
+      run: ./gradlew build buildImage buildEBArchive
 
-    - name: Export build/version.properties
-      run: env
+#     - name: Export build/version.properties
+#       run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
 
-    - name: Set the value
-      id: step_one
-      run: |
-        echo "action_state=yellow" >> $GITHUB_ENV
-    - name: Use the value
-      id: step_two
-      run: |
-        echo "${{ env.action_state }}" # This will output 'yellow'
+#     - name: Export build/version.properties
+#       run: echo "${VERSION_COMMIT}"
+
+#     - name: Set the value
+#       id: step_one
+#       run: |
+#         echo "action_state=yellow" >> $GITHUB_ENV
+#     - name: Use the value
+#       id: step_two
+#       run: |
+#         echo "${{ env.action_state }}" # This will output 'yellow'
