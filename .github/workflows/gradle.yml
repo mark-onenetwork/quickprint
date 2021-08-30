@@ -31,7 +31,7 @@ jobs:
       run: ./gradlew versionFile
 
     - name: Export build/version.properties
-      run: echo "${{ VERSION_COMMIT  }} && "export $(cat build/version.properties | xargs) && env && echo "${{ VERSION_COMMIT  }}"
+      run: echo "${{ VERSION_COMMIT  }}" && export $(cat build/version.properties | xargs) && env && echo "${{ VERSION_COMMIT  }}"
 
     - name: Export build/version.properties
       run: env
