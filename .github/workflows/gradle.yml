@@ -31,4 +31,17 @@ jobs:
       run: ./gradlew versionFile
 
     - name: Export build/version.properties
-      run: cat build/version.properties
+      run: echo "${{ VERSION_COMMIT  }} && "export $(cat build/version.properties | xargs) && env && echo "${{ VERSION_COMMIT  }}"
+
+    - name: Export build/version.properties
+      run: env
+
+
+    - name: Set the value
+      id: step_one
+      run: |
+        echo "action_state=yellow" >> $GITHUB_ENV
+  - name: Use the value
+      id: step_two
+      run: |
+        echo "${{ env.action_state }}" # This will output 'yellow'
