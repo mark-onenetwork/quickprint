@@ -31,7 +31,7 @@ jobs:
       run: ./gradlew versionFile
 
     - name: Build Image and EBArchive
-      run: ./gradlew build buildImage buildEBArchive
+      run: ./gradlew build buildImage # buildEBArchive
 
 #     - name: Export build/version.properties
 #       run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
