@@ -26,3 +26,6 @@ jobs:
 
     - name: Display bradle version
       run: ./gradlew versionDisplay
+
+    - name: Display version File
+      run: ./gradlew versionFile
