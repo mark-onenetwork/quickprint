@@ -29,3 +29,6 @@ jobs:
 
     - name: Display version File
       run: ./gradlew versionFile
+
+    - name: Export build/version.properties
+      run: cat build/version.properties
