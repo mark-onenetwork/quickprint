@@ -74,6 +74,14 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = "https://maven.pkg.github.com/mark-onenetwork/ticket_printer"
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 bootJar {
@@ -116,7 +124,7 @@ dependencies {
 		compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 		compile "org.jetbrains.kotlin:kotlin-reflect"
     compile 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    compile 'au.com.sealink:printing:1.6.0'
+    implementation 'au.com.sealink:printing:1.6.1'
 
 
     compile group: 'com.rapid7', name: 'r7insight_java', version: '3.0.7'
