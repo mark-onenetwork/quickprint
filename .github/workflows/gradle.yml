@@ -38,6 +38,13 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+    - name: Publish to GitHub Packages
+      # if: startsWith(github.ref, 'refs/tags/')
+      run: ./gradlew publishImage
+      env:
+        GITHUB_USERNAME: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 #     - name: Export build/version.properties
 #       run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
