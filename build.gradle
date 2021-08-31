@@ -124,7 +124,8 @@ dependencies {
 		compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 		compile "org.jetbrains.kotlin:kotlin-reflect"
     compile 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    implementation 'au.com.sealink:printing:1.6.1'
+    // implementation 'au.com.sealink:printing:1.6.1'
+    implementation 'au.com.sealink:printing:travis_to_github-e197a1a-dirty'
 
 
     compile group: 'com.rapid7', name: 'r7insight_java', version: '3.0.7'
@@ -182,7 +183,8 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/mark-onenetwork/quickprint"
+            // url = "https://maven.pkg.github.com/mark-onenetwork/quickprint"
+            url = "https://maven.pkg.github.com/sealink/quickprint"
             credentials {
                 username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_TOKEN")
@@ -191,7 +193,8 @@ publishing {
     }
 }
 
-def ecrBase = '120983864185.dkr.ecr.ap-southeast-2.amazonaws.com'
+// def ecrBase = '120983864185.dkr.ecr.ap-southeast-2.amazonaws.com'
+def ecrBase = '360284819191.dkr.ecr.ap-southeast-2.amazonaws.com'
 
 docker {
     registryCredentials {
