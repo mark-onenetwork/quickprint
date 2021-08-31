@@ -32,6 +32,10 @@ jobs:
 
     - name: Build Image and EBArchive
       run: ./gradlew build buildImage # buildEBArchive
+      env:
+        GITHUB_USERNAME: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 #     - name: Export build/version.properties
 #       run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
