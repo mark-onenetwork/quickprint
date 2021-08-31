@@ -15,7 +15,7 @@ buildscript {
 
 plugins {
     id "com.jfrog.bintray" version "1.8.5"
-    // id "maven-publish"
+    id "maven-publish"
     id 'net.nemerosa.versioning' version '2.14.0'
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.11.0'
@@ -161,7 +161,6 @@ def pomConfig = {
     }
 }
 
-apply plugin: 'maven-publish'
 publishing {
     publications {
         mavenPublication(MavenPublication) {
@@ -253,7 +252,7 @@ task pushImage(type: DockerPushImage) {
 
 task publishImage() {
     dependsOn pushImage
-    dependsOn bintrayUpload
+    // dependsOn bintrayUpload
 }
 
 task createDockerrun() {
