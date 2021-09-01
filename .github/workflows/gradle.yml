@@ -24,51 +24,54 @@ jobs:
         server-id: github
         settings-path: ${{ github.workspace }}
 
-    - name: Display bradle version
-      run: ./gradlew versionDisplay
+#     - name: Display bradle version
+#       run: ./gradlew versionDisplay
 
-    - name: Display version File
-      run: ./gradlew versionFile
+#     - name: Display version File
+#       run: ./gradlew versionFile
 
-    - name: Build Image and EBArchive
-      run: ./gradlew build buildImage buildEBArchive
-      env:
-        GITHUB_USERNAME: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#     - name: Build Image and EBArchive
+#       run: ./gradlew build buildImage buildEBArchive
+#       env:
+#         GITHUB_USERNAME: ${{ github.actor }}
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-    - name: Publish to GitHub Packages
-      # if: startsWith(github.ref, 'refs/tags/')
-      run: ./gradlew publishImage
-      env:
-        GITHUB_USERNAME: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     - name: Publish to GitHub Packages
+#       # if: startsWith(github.ref, 'refs/tags/')
+#       run: ./gradlew publishImage
+#       env:
+#         GITHUB_USERNAME: ${{ github.actor }}
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v18
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: QuickPrint
-        environment_name: quickprint-pdf
-        region: ap-southeast-2
-        version_label: 1.7.0
-        deployment_package: build/distributions/eb.zip
-        existing_bucket_name: quickprint-eb-deployments-test
-        wait_for_deployment: false
+#     - name: Deploy to EB
+#       uses: einaregilsson/beanstalk-deploy@v18
+#       with:
+#         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#         application_name: QuickPrint
+#         # environment_name: quickprint-pdf
+#         region: ap-southeast-2
+#         version_label: 1.7.0
+#         deployment_package: build/distributions/eb.zip
+#         existing_bucket_name: quickprint-eb-deployments-test
+#         wait_for_deployment: false
 
-#     - name: Export build/version.properties
-#       run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
+    - name: Export build/version.properties
+      run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
 
-#     - name: Export build/version.properties
-#       run: echo "${VERSION_COMMIT}"
+    - name: Export build/version.properties
+      run: echo "${VERSION_COMMIT}"
 
-#     - name: Set the value
-#       id: step_one
-#       run: |
-#         echo "action_state=yellow" >> $GITHUB_ENV
-#     - name: Use the value
-#       id: step_two
-#       run: |
-#         echo "${{ env.action_state }}" # This will output 'yellow'
+    - name: Export build/version.properties
+      run: echo "${VERSION_TAG}"
+
+    - name: Set the value
+      id: step_one
+      run: |
+        echo "action_state=yellow" >> $GITHUB_ENV
+    - name: Use the value
+      id: step_two
+      run: |
+        echo "${{ env.action_state }}" # This will output 'yellow'
