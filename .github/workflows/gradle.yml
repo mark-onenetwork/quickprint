@@ -56,7 +56,8 @@ jobs:
         application_name: QuickPrint
         # environment_name: quickprint-pdf
         region: ap-southeast-2
-        version_label: "${{ env.VERSION_TAG  }}"
+        # version_label: "${{ env.VERSION_TAG  }}"
+        version_label: 1.7.3
         deployment_package: build/distributions/eb.zip
         existing_bucket_name: quickprint-eb-deployments-test
         wait_for_deployment: false
