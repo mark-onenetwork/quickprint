@@ -38,31 +38,25 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-#     - name: Publish to GitHub Packages
-#       # if: startsWith(github.ref, 'refs/tags/')
-#       run: ./gradlew publishImage
-#       env:
-#         GITHUB_USERNAME: ${{ github.actor }}
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-#     - name: Deploy to EB
-#       uses: einaregilsson/beanstalk-deploy@v18
-#       with:
-#         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         application_name: QuickPrint
-#         # environment_name: quickprint-pdf
-#         region: ap-southeast-2
-#         version_label: 1.7.0
-#         deployment_package: build/distributions/eb.zip
-#         existing_bucket_name: quickprint-eb-deployments-test
-#         wait_for_deployment: false
-
     - name: Export build/version.properties
       run: cat build/version.properties | grep VERSION_TAG >> $GITHUB_ENV
 
-    - name: Check version tag
-      run: echo "${{ env.VERSION_TAG  }}"
+    - name: Publish to GitHub Packages
+      # if: startsWith(github.ref, 'refs/tags/')
+      run: ./gradlew publishImage
+      env:
+        GITHUB_USERNAME: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Export build/version.properties
-      run: ls -alh build/distributions
+    - name: Deploy to EB
+      uses: einaregilsson/beanstalk-deploy@v18
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: QuickPrint
+        # environment_name: quickprint-pdf
+        region: ap-southeast-2
+        version_label: "${{ env.VERSION_TAG  }}"
+        deployment_package: build/distributions/eb.zip
+        existing_bucket_name: quickprint-eb-deployments-test
+        wait_for_deployment: false
