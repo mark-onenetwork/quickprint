@@ -59,19 +59,10 @@ jobs:
 #         wait_for_deployment: false
 
     - name: Export build/version.properties
-      run: echo "${VERSION_COMMIT}" && export $(cat build/version.properties | xargs) && env && echo "${VERSION_COMMIT}"
+      run: cat build/version.properties | grep VERSION_TAG >> $GITHUB_ENV
+
+    - name: Check version tag
+      run: echo "${{ env.VERSION_TAG  }}"
 
     - name: Export build/version.properties
-      run: echo "${VERSION_COMMIT}"
-
-    - name: Export build/version.properties
-      run: echo "${VERSION_TAG}"
-
-    - name: Set the value
-      id: step_one
-      run: |
-        echo "action_state=yellow" >> $GITHUB_ENV
-    - name: Use the value
-      id: step_two
-      run: |
-        echo "${{ env.action_state }}" # This will output 'yellow'
+      run: ls -alh build/distributions
