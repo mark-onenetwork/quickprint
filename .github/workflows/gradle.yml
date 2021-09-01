@@ -24,19 +24,19 @@ jobs:
         server-id: github
         settings-path: ${{ github.workspace }}
 
-#     - name: Display bradle version
-#       run: ./gradlew versionDisplay
+    - name: Display bradle version
+      run: ./gradlew versionDisplay
 
-#     - name: Display version File
-#       run: ./gradlew versionFile
+    - name: Display version File
+      run: ./gradlew versionFile
 
-#     - name: Build Image and EBArchive
-#       run: ./gradlew build buildImage buildEBArchive
-#       env:
-#         GITHUB_USERNAME: ${{ github.actor }}
-#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Build Image and EBArchive
+      run: ./gradlew build buildImage buildEBArchive
+      env:
+        GITHUB_USERNAME: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 #     - name: Publish to GitHub Packages
 #       # if: startsWith(github.ref, 'refs/tags/')
